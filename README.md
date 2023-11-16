@@ -1,4 +1,4 @@
-# alert-kafka
+# alerts-kafka
 
 ## Пример проекта на основе Kafka
 
