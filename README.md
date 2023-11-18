@@ -48,10 +48,27 @@ bin/kafka-server-start.sh -daemon config/server2.properties
 ```bash
 cd ~/kafka_2.13-2.7.2
 bin/kafka-server-stop.sh
+sleep 10
 bin/zookeeper-server-stop.sh
 ```
 
-### Процессы Java
+## Запуск Connect
+
+```bash
+cd ~/kafka_2.13-2.7.2
+bin/connect-standalone.sh config/connect-standalone.properties config/alerts-source.properties config/alerts-sink.properties
+```
+
+## Запуск Console Consumer
+
+```bash
+cd ~/kafka_2.13-2.7.2
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9094 --topic alerts_connect --from-beginning
+```
+
+## Полезные команды
+
+Процессы Java:
 
 ```bash
 jps
