@@ -52,6 +52,15 @@ sleep 10
 bin/zookeeper-server-stop.sh
 ```
 
+## Создание топиков
+
+```bash
+cd ~/kafka_2.13-2.7.2
+bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic alert --partitions 3 --replication-factor 3
+bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic alert_trend --partitions 3 --replication-factor 3
+bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic audit --partitions 3 --replication-factor 3
+```
+
 ## Запуск Connect
 
 ```bash
@@ -67,6 +76,29 @@ bin/kafka-console-consumer.sh --bootstrap-server localhost:9094 --topic alerts_c
 ```
 
 ## Полезные команды
+
+Список топиков:
+
+```bash
+cd ~/kafka_2.13-2.7.2
+bin/zookeeper-shell.sh localhost:2181
+ls /brokers/topics
+```
+
+Другой способ:
+
+```bash
+cd ~/kafka_2.13-2.7.2
+bin/kafka-topics.sh --list --bootstrap-server localhost:9094
+```
+
+Вывод информации о контроллере:
+
+```bash
+cd ~/kafka_2.13-2.7.2
+bin/zookeeper-shell.sh localhost:2181
+get /controller
+```
 
 Процессы Java:
 
