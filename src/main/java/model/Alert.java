@@ -34,4 +34,14 @@ public class Alert implements Serializable {
     public String getAlertMessage() {
         return alertMessage;
     }
+
+    @Override
+    public String toString() {
+        return "Alert{" +
+                "alertId=" + alertId +
+                ", stageId='" + stageId + '\'' +
+                ", alertLevel='" + alertLevel + '\'' +
+                ", alertMessage='" + alertMessage + '\'' +
+                '}';
+    }
 }
