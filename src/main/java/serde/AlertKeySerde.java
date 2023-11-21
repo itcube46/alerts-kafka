@@ -1,5 +1,7 @@
 package serde;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import model.Alert;
 import org.apache.kafka.common.serialization.Deserializer;
 import org.apache.kafka.common.serialization.Serializer;
@@ -12,12 +14,15 @@ public class AlertKeySerde implements Serializer<Alert>, Deserializer<Alert> {
         if (key == null) {
             return null;
         }
-        return key.getStageId().getBytes(StandardCharsets.UTF_8);
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String json = gson.toJson(key);
+        return json.getBytes(StandardCharsets.UTF_8);
     }
 
-    public Alert deserialize(String topic, byte[] value) {
-        // Заглушка десериализации
-        return new Alert(0, "Stage 0", "CRITICAL", "Stage 0 stopped");
+    public Alert deserialize(String topic, byte[] byteArray) {
+        String json = new String(byteArray, StandardCharsets.UTF_8);
+        Gson gson = new Gson();
+        return gson.fromJson(json, Alert.class);
     }
 
     @Override

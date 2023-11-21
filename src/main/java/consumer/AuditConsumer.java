@@ -18,6 +18,7 @@ public class AuditConsumer {
         Properties kafkaProperties = getKafkaProperties();
         final AuditConsumer auditConsumer = new AuditConsumer();
         auditConsumer.consume(kafkaProperties);
+
         Runtime.getRuntime().addShutdownHook(new Thread(auditConsumer::shutdown));
     }
 
@@ -35,7 +36,6 @@ public class AuditConsumer {
 
     private void consume(final Properties kafkaProperties) {
         try (KafkaConsumer<String, String> consumer = new KafkaConsumer<>(kafkaProperties)) {
-
             consumer.subscribe(List.of("audit"));
 
             while (keepConsuming) {

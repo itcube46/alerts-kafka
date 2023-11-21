@@ -31,8 +31,7 @@ public class AlertConsumer {
         kafkaProperties.put("enable.auto.commit", "false");
         kafkaProperties.put("group.id", "alert_group");
         kafkaProperties.put("key.deserializer", AlertKeySerde.class.getName());
-        kafkaProperties.put("value.deserializer",
-                "org.apache.kafka.common.serialization.StringDeserializer");
+        kafkaProperties.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         return kafkaProperties;
     }
 
